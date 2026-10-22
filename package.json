@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "description": "Egyszerű TypeScript 7 hello world könyvtár",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donamo/ptw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/donamo/ptw/issues"
+  },
+  "homepage": "https://github.com/donamo/ptw#readme",
   "author": "Szabo Ambrus <szambusz@gmail.com>",
   "type": "module",
   "main": "./dist/index.js",
