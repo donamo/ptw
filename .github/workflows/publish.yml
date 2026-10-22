@@ -9,7 +9,7 @@ permissions:
   id-token: write # npm provenance
 
 jobs:
-  publish:
+  stage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +18,14 @@ jobs:
           node-version: 24
           cache: npm
           registry-url: https://registry.npmjs.org
+      # az `npm stage` parancshoz npm >= 11.15.0 kell
+      - run: npm install -g npm@latest
       - run: npm ci
-      - run: npm publish
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      # Csak előkészíti a kiadást: az npmjs.com-on 2FA-val kell jóváhagyni
+      # (`npm stage approve <stage-id>` vagy a weboldalon).
+      - run: npm stage publish ptw --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
